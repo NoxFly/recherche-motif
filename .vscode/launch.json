@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "args": "tests/test.txt"
+        },
+        {
+            "type": "java",
+            "name": "Launch RechercheMotif",
+            "request": "launch",
+            "mainClass": "RechercheMotif",
+            "projectName": "apnee1-algo_95a56e43"
+        }
+    ]
+}
