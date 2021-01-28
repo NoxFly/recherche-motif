@@ -33,7 +33,7 @@ public class RechercheMotif {
     }
 
     static int getUnitCode(String s, int i) {
-        System.out.println("Hash de " + s.charAt(i) + " = " + ((int)s.charAt(i)));
+        // System.out.println("Hash de " + s.charAt(i) + " = " + ((int)s.charAt(i)));
         return (int)s.charAt(i);
     }
 
@@ -63,44 +63,35 @@ public class RechercheMotif {
         // indice de parcours du motif
         int j;
         // valeurs de hachage du motif et des sous-chaînes
-        int hmotif, hcourant, words_correspond_count, real_found_patterns;
+        int hmotif, hcourant;
 
         hmotif = hash(motif, 0, motif.length());
         i = 0;
         hcourant = 0;
-        words_correspond_count = 0;
-        real_found_patterns = 0;
         
-        System.out.println(texte.length() - motif.length());
-        while (i < texte.length() - motif.length()) {
+        while (i < texte.length() - motif.length() +1) {
             // hachage de la sous-chaîne texte[i..i+m-1]
             hcourant = (i==0)? 
                 hash(texte, i, i + motif.length()) :
-                updateHash(texte, hcourant, i, i + motif.length());
-
-            System.out.printf("%d. %s : %d - %d\n", i, texte.substring(i, i+motif.length()), hmotif, hcourant);
+                updateHash(texte, hcourant, i, i + motif.length()-1);
                 
             if (hcourant == hmotif) {
-                words_correspond_count++;
                 // recherche du motif à l'indice i
                 j = 0;
-                System.out.println(texte.charAt(i + j) + motif.charAt(j));
                 while ((j < motif.length()) && (texte.charAt(i + j) == motif.charAt(j))) {
                     // invariant : texte[i..i+j-1] = motif[0..j-1]
                     j++;
                 }
 
                 if (j == motif.length()) {
-                    System.out.println(++real_found_patterns);
+					System.out.println(i);
                 }
             }
             i++;
         }
-        System.out.println(words_correspond_count + " / " + real_found_patterns);
     }
 
     public static void main(String args[]) {
-
         String texte;
         String motif;
 
@@ -128,7 +119,7 @@ public class RechercheMotif {
                 long endTime = System.nanoTime();
 
                 // Impression de la longueur du texte et du temps d'exécution
-                //System.out.println(args[i].replace("tests/wc", "") + "\t" + ((endTime - startTime) / 1.0E9));
+                System.out.println(args[i].replace("tests/wc", "") + "\t" + ((endTime - startTime) / 1.0E9));
 
             } catch (FileNotFoundException e) {
                 System.err.println("Erreur lors de l'ouverture du fichier " + args[i]);
